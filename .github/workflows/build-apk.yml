@@ -1,0 +1,42 @@
+name: Build APK Android MCF
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Installer Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Generer le dossier android si absent
+        run: |
+          if [ ! -d "android" ]; then
+            flutter create --platforms=android .
+          fi
+
+      - name: Installer les dependances
+        run: flutter pub get
+
+      - name: Compiler APK release
+        run: flutter build apk --release
+
+      - name: Publier APK comme artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcf-app-release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
