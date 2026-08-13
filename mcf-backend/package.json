@@ -1,0 +1,21 @@
+{
+  "name": "mcf-backend",
+  "version": "0.1.0",
+  "description": "Backend MCF (Micro Cash Finance) - API de micro-crédit avec intégration Airtel Money",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.12.0",
+    "jsonwebtoken": "^9.0.2",
+    "dotenv": "^16.4.5",
+    "axios": "^1.7.2",
+    "helmet": "^7.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
